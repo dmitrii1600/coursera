@@ -3,7 +3,7 @@ import { Media } from 'reactstrap';
 
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle } from 'reactstrap';
-import DishDetail from "./DishDetail";
+import DishDetailComponent from "./DishDetailComponent";
 
 class Menu extends Component {
 
@@ -39,7 +39,7 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                <DishDetail dish={this.state.selectedDish}/>
+                <DishDetailComponent dish={this.state.selectedDish}/>
             </div>
         );
     }

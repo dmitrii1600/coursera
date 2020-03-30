@@ -5,7 +5,7 @@ import {
     CardTitle
 } from 'reactstrap';
 
-class DishDetail extends Component {
+class DishDetailComponent extends Component {
 
     renderDish(dish) {
         if (dish != null)
@@ -59,8 +59,7 @@ class DishDetail extends Component {
         else return (
             <div></div>
         );
-
     }
 }
 
-export default DishDetail;
+export default DishDetailComponent;
