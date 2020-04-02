@@ -4,6 +4,8 @@ import {NavbarBrand} from "reactstrap";
 import DishDetailComponent from "./DishDetailComponent";
 import {DISHES} from "../shared/dishes";
 import Menu from "./MenuComponent";
+import Header from "./HeaderComponent";
+import Footer from "./FooterComponent";
 
 class Main extends Component {
     constructor(props) {
@@ -21,15 +23,12 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <Navbar dark color='primary'>
-                    <div className='container'>
-                        <NavbarBrand href='#'> Nav Bar Confusion</NavbarBrand>
-                    </div>
-                </Navbar>
+                <Header/>
                 <Menu dishes={this.state.dishes}
                       onClick={(dishId) => this.onDishSelect(dishId)}
                 />
                 <DishDetailComponent dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]}/>
+                <Footer/>
             </div>
         );
     }
