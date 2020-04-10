@@ -36,7 +36,7 @@ const Menu = (props) => {
                     <hr />
                 </div>
             </div>
-            <div className="row">
+            <div className="row justify-content-center">
                 {menu}
             </div>
         </div>
