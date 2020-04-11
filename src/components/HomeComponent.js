@@ -3,10 +3,21 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle
 } from 'reactstrap';
+import {Loading} from "./LoadingComponent";
 
-function RenderCard({item}) {
-
-    return (
+function RenderCard({item, isLoading, errMess}) {
+    if (isLoading) {
+        return(
+            <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+            <h4>{errMess}</h4>
+        );
+    }
+    else
+        return (
         <div className="col-12 col-md m-1" >
             <Card className="h-100">
                 <CardImg src={item.image} alt={item.name}/>
@@ -25,7 +36,7 @@ function Home(props) {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <RenderCard item={props.dish}/>
+                <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}  />
                 <RenderCard item={props.promotion}/>
                 <RenderCard item={props.leader}/>
             </div>
