@@ -32,7 +32,7 @@ function RenderDish({dish}) {
         );
 }
 
-function RenderComments({comments}) {
+function RenderComments({comments, dishId, addComment}) {
     if (comments != null) {
         const commentsLi = comments.map((comment) => (
             <li className="list-group-item" key={comment.id}>
@@ -50,7 +50,7 @@ function RenderComments({comments}) {
                 <ul className="list-group">
                     {commentsLi}
                 </ul>
-                <CommentForm/>
+                <CommentForm dishId={dishId} addComment={addComment}/>
             </div>
         );
     } else
@@ -80,8 +80,8 @@ class CommentForm extends Component {
     };
 
     handleSubmit = (values) => {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.toggleCommentModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     };
 
     render() {
@@ -106,8 +106,8 @@ class CommentForm extends Component {
                                 </Control.select>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="authorName">Your Name</Label>
-                                <Control.text model=".authorName" id="authorName" name="authorName"
+                                <Label htmlFor="author">Your Name</Label>
+                                <Control.text model=".author" id="author" name="author"
                                               placeholder="Your name"
                                               className="form-control"
                                               validators={{
@@ -116,7 +116,7 @@ class CommentForm extends Component {
                                 />
                                 <Errors
                                     className="text-danger"
-                                    model=".authorName"
+                                    model=".author"
                                     show="touched"
                                     messages={{
                                         required: 'Required. ',
@@ -145,7 +145,7 @@ class CommentForm extends Component {
     }
 }
 
-const DishDetail = ({dish, comments}) => {
+const DishDetail = ({dish, comments, addComment}) => {
     if (dish != null)
         return (
             <div className="container">
@@ -162,7 +162,7 @@ const DishDetail = ({dish, comments}) => {
                 </div>
                 <div className="row justify-content-center">
                     <RenderDish dish={dish}/>
-                    <RenderComments comments={comments}/>
+                    <RenderComments comments={comments} dishId={dish.id} addComment={addComment}/>
                 </div>
             </div>
         );
