@@ -45,7 +45,7 @@ function RenderComments({comments}) {
             </li>
         ));
         return (
-            <div className="col-12 col-md-5 m-1">
+            <div className="col-12 col-md-5 m-1 h-100">
                 <h4>Comments</h4>
                 <ul className="list-group">
                     {commentsLi}
@@ -129,6 +129,7 @@ class CommentForm extends Component {
                                 <Label htmlFor="comment">Comment</Label>
                                 <Control.textarea model=".comment" id="comment" name="comment"
                                                   rows="6"
+                                                  placeholder="Comment text"
                                                   className="form-control"/>
                             </Row>
                             <Row className="form-group">
