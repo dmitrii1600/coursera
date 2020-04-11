@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import {DISHES} from '../shared/dishes';
+import {actions} from "react-redux-form";
 
 export const addComment = (dishId, rating, author, comment) => ({
     type: ActionTypes.ADD_COMMENT,
@@ -33,3 +34,5 @@ export const addDishes = (dishes) => ({
     type: ActionTypes.ADD_DISHES,
     payload: dishes
 });
+
+export const resetFeedbackForm = () => dispatch =>  { dispatch(actions.reset('feedback'))};

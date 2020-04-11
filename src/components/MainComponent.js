@@ -9,7 +9,8 @@ import DishDetail from "./DishDetailComponent";
 import About from "./AboutComponent";
 import {connect} from 'react-redux';
 import {compose} from "redux";
-import {addComment, fetchDishes} from "../redux/ActionCreators";
+import {addComment, fetchDishes, resetFeedbackForm} from "../redux/ActionCreators";
+import { actions } from 'react-redux-form';
 
 const mapStateToProps = state => {
     return {
@@ -18,7 +19,7 @@ const mapStateToProps = state => {
         promotions: state.promotions,
         leaders: state.leaders
     }
-}
+};
 
 class Main extends Component {
 
@@ -60,7 +61,7 @@ class Main extends Component {
                         <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders}/>}/>} />
                         <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes}/>}/>
                         <Route path='/menu/:dishId' component={DishWithId}/>
-                        <Route exact path='/contactus' component={Contact}/>} />
+                        <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}/>}/>
                         <Redirect to="/home"/>
                     </Switch>
                 </div>
@@ -70,7 +71,8 @@ class Main extends Component {
     }
 }
 
+
 export default compose(
-    connect(mapStateToProps, {addComment, fetchDishes}),
+    connect(mapStateToProps, {addComment, fetchDishes, resetFeedbackForm}),
     withRouter,
 )(Main);
