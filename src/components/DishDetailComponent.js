@@ -34,7 +34,7 @@ function RenderDish({dish}) {
         );
 }
 
-function RenderComments({comments, dishId, addComment}) {
+function RenderComments({comments, dishId, postComment}) {
     if (comments != null) {
         const commentsLi = comments.map((comment) => (
             <li className="list-group-item" key={comment.id}>
@@ -52,7 +52,7 @@ function RenderComments({comments, dishId, addComment}) {
                 <ul className="list-group">
                     {commentsLi}
                 </ul>
-                <CommentForm dishId={dishId} addComment={addComment}/>
+                <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
         );
     } else
@@ -83,7 +83,7 @@ class CommentForm extends Component {
 
     handleSubmit = (values) => {
         this.toggleCommentModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     };
 
     render() {
@@ -147,7 +147,7 @@ class CommentForm extends Component {
     }
 }
 
-const DishDetail = ({dish, comments, addComment, ...props}) => {
+const DishDetail = ({dish, comments, postComment, ...props}) => {
     if (props.isLoading) {
         return (
             <div className="container">
@@ -180,7 +180,7 @@ const DishDetail = ({dish, comments, addComment, ...props}) => {
                 </div>
                 <div className="row justify-content-center">
                     <RenderDish dish={dish}/>
-                    <RenderComments comments={comments} dishId={dish.id} addComment={addComment}/>
+                    <RenderComments comments={comments} dishId={dish.id} postComment={postComment}/>
                 </div>
             </div>
         );

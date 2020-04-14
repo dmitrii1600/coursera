@@ -9,7 +9,14 @@ import DishDetail from "./DishDetailComponent";
 import About from "./AboutComponent";
 import {connect} from 'react-redux';
 import {compose} from "redux";
-import {addComment, fetchComments, fetchDishes, fetchPromos, resetFeedbackForm} from "../redux/ActionCreators";
+import {
+    addComment,
+    fetchComments,
+    fetchDishes,
+    fetchPromos,
+    postComment,
+    resetFeedbackForm
+} from "../redux/ActionCreators";
 
 const mapStateToProps = state => {
     return {
@@ -51,7 +58,7 @@ class Main extends Component {
                     errMess={this.props.dishes.errMess}
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
                     commentsErrMess={this.props.comments.errMess}
-                    addComment={this.props.addComment}
+                    postComment={this.props.postComment}
                 />
             );
         };
@@ -77,6 +84,6 @@ class Main extends Component {
 
 
 export default compose(
-    connect(mapStateToProps, {addComment, fetchDishes, resetFeedbackForm, fetchComments, fetchPromos}),
+    connect(mapStateToProps, {postComment, fetchDishes, resetFeedbackForm, fetchComments, fetchPromos}),
     withRouter,
 )(Main);
