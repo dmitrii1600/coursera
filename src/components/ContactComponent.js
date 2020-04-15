@@ -30,12 +30,17 @@ class Contact extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
 
     }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        console.log('Current State of feedback is: ' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
+        this.props.resetFeedbackForm();
+    }
+
+    handleCancel() {
         this.props.resetFeedbackForm();
     }
 
@@ -140,7 +145,10 @@ class Contact extends Component {
                                                   placeholder="Tel. Number"
                                                   className="form-control"
                                                   validators={{
-                                                      required, minLength: minLength(3), maxLength: maxLength(15), isNumber
+                                                      required,
+                                                      minLength: minLength(3),
+                                                      maxLength: maxLength(15),
+                                                      isNumber
                                                   }}
                                     />
                                     <Errors
@@ -206,8 +214,11 @@ class Contact extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={{size: 10, offset: 2}}>
-                                    <Button type="submit" color="primary">
+                                    <Button type="submit" color="primary" className="mr-2">
                                         Send Feedback
+                                    </Button>
+                                    <Button onClick={this.handleCancel} outline type="cancel" color="primary">
+                                        Cancel
                                     </Button>
                                 </Col>
                             </Row>

@@ -11,9 +11,9 @@ import {connect} from 'react-redux';
 import {compose} from "redux";
 import {
     fetchComments,
-    fetchDishes,
+    fetchDishes, fetchLeaders,
     fetchPromos,
-    postComment,
+    postComment, postFeedback,
     resetFeedbackForm
 } from "../redux/ActionCreators";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
         dishes: state.dishes,
         comments: state.comments,
         promotions: state.promotions,
-        leaders: state.leaders
+        leaders: state.leaders,
     }
 };
 
@@ -33,6 +33,7 @@ class Main extends Component {
         this.props.fetchDishes();
         this.props.fetchComments();
         this.props.fetchPromos();
+        this.props.fetchLeaders();
     }
 
     render() {
@@ -43,9 +44,11 @@ class Main extends Component {
                     dishesLoading={this.props.dishes.isLoading}
                     dishErrMess={this.props.dishes.errMess}
                     promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
-                    promoLoading={this.props.promotions.isLoading}
-                    promoErrMess={this.props.promotions.errMess}
-                    leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+                    promosLoading={this.props.promotions.isLoading}
+                    promosErrMess={this.props.promotions.errMess}
+                    leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
+                    leadersLoading={this.props.leaders.isLoading}
+                    leadersErrMess={this.props.leaders.errMess}
                 />
             );
         };
@@ -76,7 +79,9 @@ class Main extends Component {
                                 <Route exact path='/menu' component={() => <Menu dishes={this.props.dishes}/>}/>
                                 <Route path='/menu/:dishId' component={DishWithId}/>
                                 <Route exact path='/contactus'
-                                       component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}/>}/>
+                                       component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}
+                                                                 postFeedback={this.props.postFeedback}
+                                       />}/>
                                 <Redirect to="/home"/>
                             </Switch>
                         </CSSTransition>
@@ -90,6 +95,6 @@ class Main extends Component {
 
 
 export default compose(
-    connect(mapStateToProps, {postComment, fetchDishes, resetFeedbackForm, fetchComments, fetchPromos}),
+    connect(mapStateToProps, {postComment, postFeedback, fetchDishes, resetFeedbackForm, fetchComments, fetchPromos, fetchLeaders}),
     withRouter,
 )(Main);

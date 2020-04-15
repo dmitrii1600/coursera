@@ -43,8 +43,8 @@ function Home(props) {
         <div className="container">
             <div className="row justify-content-center">
                 <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
-                <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess}/>
-                <RenderCard item={props.leader}/>
+                <RenderCard item={props.promotion} isLoading={props.promosLoading} errMess={props.promosErrMess}/>
+                <RenderCard item={props.leader} isLoading={props.leadersLoading} errMess={props.leadersErrMess}/>
             </div>
         </div>
     );
