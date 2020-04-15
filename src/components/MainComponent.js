@@ -10,7 +10,6 @@ import About from "./AboutComponent";
 import {connect} from 'react-redux';
 import {compose} from "redux";
 import {
-    addComment,
     fetchComments,
     fetchDishes,
     fetchPromos,

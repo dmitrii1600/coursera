@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import {DISHES} from '../shared/dishes';
 import {actions} from "react-redux-form";
 import {baseUrl} from "../shared/baseURL";
 
